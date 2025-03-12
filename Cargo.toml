@@ -1,0 +1,9 @@
+[package]
+name = "sequent"
+version = "0.1.0"
+edition = "2024"
+description = "Rust drivers for Raspberry Pi hats by Sequent Microsystems"
+
+[dependencies]
+rppal = "0.22.1"
+thiserror = "2.0.12"
