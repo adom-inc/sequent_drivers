@@ -97,4 +97,15 @@ impl SolidStateRelay16 {
 
         Ok(output & (1 << bit_index) != 0)
     }
+
+    /// Reads the state of every relay with a single output-register read.
+    /// Index 0 corresponds to relay 1.
+    pub fn get_all(&self) -> Result<[bool; 16], Error> {
+        let output = self.bus.smbus_read_word(Register::Output as _)?;
+
+        Ok(core::array::from_fn(|i| {
+            let bit_index = MAX_RELAY_INDEX - (i as u8 + 1);
+            output & (1 << bit_index) != 0
+        }))
+    }
 }
